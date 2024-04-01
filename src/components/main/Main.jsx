@@ -5,6 +5,7 @@ import {getRepos} from "../actions/repos";
 import Repo from "./repo/Repo";
 import {setCurrentPage} from "../../reducers/reposReducer";
 import {createPages} from "../../utils/pagesCreator";
+import {Redirect} from "react-router-dom";
 
 const Main = () => {
     const dispatch = useDispatch()
@@ -13,6 +14,7 @@ const Main = () => {
     const currentPage = useSelector(state => state.repos.currentPage)
     const totalCount = useSelector(state => state.repos.totalCount)
     const perPage = useSelector(state => state.repos.perPage)
+    const isFetchError = useSelector(state => state.repos.isFetchError)
     const [searchValue, setSearchValue] = useState("")
     const pagesCount = Math.ceil(totalCount/perPage)
     const pages = []
@@ -27,8 +29,15 @@ const Main = () => {
         dispatch(getRepos(searchValue, currentPage, perPage))
     }
 
+
+
     return (
         <div>
+            { isFetchError &&
+            <div className="alert alert-danger" role="alert">
+                Error! Please, refresh your page!
+            </div>
+            }
             <div className="search">
                 <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} type="text" placeholder="Input repo name" className="search-input"/>
                 <button onClick={()=> searchHandler()} className="search-btn">Search</button>
@@ -37,7 +46,7 @@ const Main = () => {
             {
                 isFetching === false
                  ?
-                repos.map(repo =><Repo key={repo.id} repo={repo}/>)
+                repos.map(repo =><Repo repo={repo}/>)
                  :
                     <div className="fetching">
 

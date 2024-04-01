@@ -10,10 +10,10 @@ const Repo = (props) => {
         <div className="repo">
             <div className="repo-header">
                 <div className="repo-header-name"><NavLink to={`/card/${repo.owner.login}/${repo.name}`}>{repo.name}</NavLink></div>
-                <div className="repo-header-stars">Количество звезд: {repo.stargazers_count}</div>
+                <div className="repo-header-stars">Count of stars: {repo.stargazers_count}</div>
             </div>
-            <div className="repo-last-commit">Последний коммит: {repo.updated_at}</div>
-            <a href={repo.html_url} className="repo-link">Ссылка на репозиторий: {repo.html_url}</a>
+            <div className="repo-last-commit">Last commit: {repo.updated_at}</div>
+            <a href={repo.html_url} className="repo-link">Link ro repository: {repo.html_url}</a>
         </div>
     );
 };
