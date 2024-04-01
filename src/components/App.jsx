@@ -14,7 +14,7 @@ const App = () => {
             <div className="container">
                 <Routes>
                     <Route path="/" element={<Main/>}/>
-                    <Route path="/card" element={<Card />} />
+                    <Route path="/card/:username/:reponame" element={<Card />} />
                     <Route path="*" element={<Navigate to="/" />} />
                 </Routes>
             </div>
